@@ -1,10 +1,10 @@
 let chai = require('chai');
-let expect = chai.expect;
+let should = chai.should();
 
 let validator = require('../lib/validator');
 
 describe('A validator', () => {
     it('should return error.nonpositive for not strictly positive numbers', () => {
-        expect(validator(0)).to.be.deep.equal(['error.nonpositive']);
+        validator(0).should.be.deep.equal(['error.nonpositive']);
     });
 });
