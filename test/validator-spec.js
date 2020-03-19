@@ -1,9 +1,10 @@
-let assert = require('assert');
+let chai = require('chai');
+let expect = chai.expect;
 
 let validator = require('../lib/validator');
 
 describe('A validator', () => {
     it('should return error.nonpositive for not strictly positive numbers', () => {
-        assert.deepEqual(validator(0), ['error.nonpositive']);
+        expect(validator(0)).to.be.deep.equal(['error.nonpositive']);
     });
 });
