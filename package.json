@@ -11,7 +11,14 @@
   "license": "ISC",
   "devDependencies": {
     "chai": "^4.2.0",
+    "husky": "^4.2.3",
     "mocha": "^7.1.1"
   },
-  "dependencies": {}
+  "dependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm test",
+      "pre-push": "npm test"
+    }
+  }
 }
