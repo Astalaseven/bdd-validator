@@ -10,6 +10,8 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
     "chai": "^4.2.0",
     "husky": "^4.2.3",
     "mocha": "^7.1.1"
@@ -18,7 +20,8 @@
   "husky": {
     "hooks": {
       "pre-commit": "npm test",
-      "pre-push": "npm test"
+      "pre-push": "npm test",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   }
 }
