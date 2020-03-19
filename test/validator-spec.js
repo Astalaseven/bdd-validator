@@ -8,33 +8,33 @@ describe('A validator', () => {
         expect(validator(7)).to.be.empty;
     });
 
-    describe('should return error.nonpositive for not strictly positive numbers', () => {
+    describe('should include error.nonpositive for not strictly positive numbers', () => {
         it('like 0', () => {
-            expect(validator(0)).to.be.deep.equal(['error.nonpositive']);
+            expect(validator(0)).to.include('error.nonpositive');
         });
 
         it('like -2', () => {
-            expect(validator(-2)).to.be.deep.equal(['error.nonpositive']);
+            expect(validator(-2)).to.include('error.nonpositive');
         });
     });
 
-    describe('should return error.three for divisible by 3 numbers', () => {
+    describe('should include error.three for divisible by 3 numbers', () => {
         it('like 3', () => {
-            expect(validator(3)).to.be.deep.equal(['error.three']);
+            expect(validator(3)).to.include('error.three');
         });
 
-        it('like 6', () => {
-            expect(validator(6)).to.be.deep.equal(['error.three']);
+        it('like 15', () => {
+            expect(validator(15)).to.include('error.three');
         });
     });
 
-    describe('should return error.five for divisible by 5 numbers', () => {
+    describe('should include error.five for divisible by 5 numbers', () => {
         it('like 5', () => {
-            expect(validator(5)).to.be.deep.equal(['error.five']);
+            expect(validator(5)).to.include('error.five');
         });
 
-        it('like 10', () => {
-            expect(validator(10)).to.be.deep.equal(['error.five']);
+        it('like 15', () => {
+            expect(validator(15)).to.include('error.five');
         });
     });
 });
