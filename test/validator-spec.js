@@ -27,4 +27,14 @@ describe('A validator', () => {
             expect(validator(6)).to.be.deep.equal(['error.three']);
         });
     });
+
+    describe('should return error.five for divisible by 5 numbers', () => {
+        it('like 5', () => {
+            expect(validator(5)).to.be.deep.equal(['error.five']);
+        });
+
+        it('like 10', () => {
+            expect(validator(10)).to.be.deep.equal(['error.five']);
+        });
+    });
 });
