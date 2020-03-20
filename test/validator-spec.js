@@ -1,20 +1,32 @@
 let chai = require('chai');
 let expect = chai.expect;
 
-let validatorWith = require('../lib/validator');
-let nonPositiveValidationRule = require('../lib/rules/nonPositive');
-let nonDivisibleValidationRule = require('../lib/rules/nonDivisible');
+let factoryWithConfiguration = require('../lib/factory');
 
 describe('A validation', () => {
     let validator;
+    let configuration;
 
     context('with default rules', () => {
         beforeEach(() => {
-            validator = validatorWith([
-                nonPositiveValidationRule,
-                nonDivisibleValidationRule(3, 'error.three'),
-                nonDivisibleValidationRule(5, 'error.five')
-            ]);
+            configuration = function () {
+                configuration.callCount++;
+                configuration.args = Array.prototype.slice.call(arguments);
+                return [
+                    {type: 'nonPositive'},
+                    {type: 'nonDivisible', options: {divisor: 3, error: 'error.three'}},
+                    {type: 'nonDivisible', options: {divisor: 5, error: 'error.five'}}
+                ];
+            };
+            configuration.callCount = 0;
+
+            let newValidator = factoryWithConfiguration(configuration);
+            validator = newValidator('default');
+        });
+
+        it('should access the configuration to get the validation rules', () => {
+            expect(configuration.callCount).to.be.equal(1);
+            expect(configuration.args).to.be.deep.equal(['default']);
         });
 
         it('should return no errors for valid numbers', () => expect(validator(7)).to.be.empty);
